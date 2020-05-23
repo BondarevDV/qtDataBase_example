@@ -6,12 +6,14 @@
 #include <QDebug>
 #include <QDateTime>
 
-class TableModelSql : public QSqlTableModel
+
+class DataTableModel : public QSqlTableModel
 {
     Q_OBJECT
 public:
-    explicit TableModelSql(QObject *parent);
-    QVariant data(const QModelIndex &idx, int role) const;
+
+    explicit DataTableModel(QObject *parent);
+    QVariant data(const QModelIndex &idx, int role) const override;
 };
 
 #endif // TABLEMODELSQL_H

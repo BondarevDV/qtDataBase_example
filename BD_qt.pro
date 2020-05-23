@@ -1,4 +1,4 @@
-QT       += core gui sql
+QT       += core gui sql printsupport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -19,12 +19,14 @@ SOURCES += \
     database.cpp \
     main.cpp \
     mainwindow.cpp \
+    qcustomplot.cpp \
     tablemodelsql.cpp \
     timesqltablemodel.cpp
 
 HEADERS += \
     database.h \
     mainwindow.h \
+    qcustomplot.h \
     tablemodelsql.h \
     timesqltablemodel.h
 

@@ -1,14 +1,13 @@
 #include "tablemodelsql.h"
 
-TableModelSql::TableModelSql(QObject *parent) : QSqlTableModel(parent)
+DataTableModel::DataTableModel(QObject *parent) : QSqlTableModel(parent)
 {
 
 }
 
-QVariant TableModelSql::data(const QModelIndex &idx, int role) const
+QVariant DataTableModel::data(const QModelIndex &idx, int role) const
 {
     QVariant v = QSqlTableModel::data(this->index(idx.row(), 0));
-
     if(role == Qt::DisplayRole){
         QString fmt = "dd-MM-yyyy hh:mm:ss";
         uint time_stamp = QSqlTableModel::data(this->index(idx.row(), 0)).toUInt();

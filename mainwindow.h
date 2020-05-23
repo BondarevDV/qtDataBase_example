@@ -25,7 +25,7 @@ private:
      * и моделью представления таблицы базы данных
      * */
     CDataBase        *db;
-    TableModelSql  *model;
+    DataTableModel  *model;
 
 private:
     /* Также присутствуют два метода, которые формируют модель
