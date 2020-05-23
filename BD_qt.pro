@@ -19,11 +19,13 @@ SOURCES += \
     database.cpp \
     main.cpp \
     mainwindow.cpp \
+    tablemodelsql.cpp \
     timesqltablemodel.cpp
 
 HEADERS += \
     database.h \
     mainwindow.h \
+    tablemodelsql.h \
     timesqltablemodel.h
 
 FORMS += \

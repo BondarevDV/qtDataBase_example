@@ -28,7 +28,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::setupModel(const QString &tableName, const QStringList &headers)
 {
-    model = new QSqlTableModel(this);
+    model = new TableModelSql(this);
     model->setTable(tableName);
     /* Устанавливаем названия колонок в таблице с сортировкой данных
      * */

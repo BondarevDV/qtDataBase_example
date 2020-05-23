@@ -5,6 +5,7 @@
 #include <QSqlTableModel>
 #include <QtSql/QtSql>
 #include <database.h>
+#include "tablemodelsql.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -24,7 +25,7 @@ private:
      * и моделью представления таблицы базы данных
      * */
     CDataBase        *db;
-    QSqlTableModel  *model;
+    TableModelSql  *model;
 
 private:
     /* Также присутствуют два метода, которые формируют модель
