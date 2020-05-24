@@ -10,18 +10,16 @@ MainWindow::MainWindow(QWidget *parent)
     /* Первым делом необходимо создать объект, который будет использоваться для работы с данными нашей БД
      * и инициализировать подключение к базе данных
      * */
-
-
     db = new CDataBase();
     db->connectToDataBase();
 
+    dlg = new DemoDialog(this);
+    dlg->setTablesName(db->tables());
+    connect(dlg, SIGNAL(chooseTable(QString)), this, SLOT(setupModel(QString)));
 
-    this->setupModel(TABLE,
-                     QStringList() << "time"
-                                   << "value"
-                                   << "Number"
-               );
-    this->createUI();
+
+//    this->setupModel(TABLE);
+//    this->createUI();
 }
 
 MainWindow::~MainWindow()
@@ -29,8 +27,13 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::setupModel(const QString &tableName, const QStringList &headers)
+void MainWindow::setupModel(const QString tableName )
 {
+    qDebug()<< "setup model" ;
+    QStringList headers;
+    headers = QStringList() << "time"
+                            << "value"
+                            << "Number";
     model = new DataTableModel(this);
     model->setTable(tableName);
     /* Устанавливаем названия колонок в таблице с сортировкой данных
@@ -40,24 +43,8 @@ void MainWindow::setupModel(const QString &tableName, const QStringList &headers
     }
     // Устанавливаем сортировку по возрастанию данных по нулевой колонке
     model->setSort(0,Qt::AscendingOrder);
-    //model->select();
 
-    //auto time = model->record(4).value("Time").toInt();
-    //auto data = model->data();
-    //auto size = model->rowCount();
-    //model->setEditStrategy(QSqlTableModel::OnFieldChange);
-
-    //qDebug()<< time;
-    //qDebug()<< size;
-
-    //qDebug()<< data;
-    auto record = model->record(0);
-    //qDebug()<< QDateTime::fromTime_t(record.value("time").toInt())<<":"<<record.value("value").toInt()<<":"<<record.value("Number").toInt();
-    QString fmt = "dd-MM-yyyy hh:mm:ss";
-    uint time_stamp = record.value("time").toUInt();
-
-    qDebug() << QDateTime::fromTime_t(time_stamp).toString(fmt);
-
+    this->createUI();
 }
 
 void MainWindow::createUI()
@@ -87,7 +74,5 @@ void MainWindow::on_ActionOpenDB_triggered()
 
 void MainWindow::on_ActionReload_triggered()
 {
-    DemoDialog* dlg = new DemoDialog(this);
-    dlg->setTablesName(db->tables());
     dlg->show();
 }

@@ -6,6 +6,7 @@
 #include <QBoxLayout>
 #include <QPushButton>
 #include <QComboBox>
+#include <QDebug>
 
 class DemoDialog : public QDialog {
     Q_OBJECT
@@ -19,6 +20,11 @@ public:
 
 signals:
     void applied();
+    void chooseTable(QString tableName);
+
+public slots:
+    void accept_data();
+
 
 private:
     QComboBox* m_tables;

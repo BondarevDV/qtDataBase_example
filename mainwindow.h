@@ -24,9 +24,14 @@ private slots:
     void on_ActionOpenDB_triggered();
 
     void on_ActionReload_triggered();
+    void setupModel(const QString tableName);
 
 private:
     Ui::MainWindow *ui;
+    /*
+     * диалоговое окно для выбора таблиц
+    */
+    DemoDialog* dlg;
     /* В проекте используются объекты для взаимодействия с информацией в базе данных
      * и моделью представления таблицы базы данных
      * */
@@ -37,7 +42,7 @@ private:
     /* Также присутствуют два метода, которые формируют модель
      * и внешний вид TableView
      * */
-    void setupModel(const QString &tableName, const QStringList &headers);
+
     void createUI();
 
 };

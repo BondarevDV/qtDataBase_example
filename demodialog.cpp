@@ -9,7 +9,7 @@ DemoDialog::DemoDialog( QWidget* parent ) : QDialog( parent ) {
     layout->addWidget( m_tables );
 
     QPushButton* okBtn = new QPushButton( "OK" );
-    connect( okBtn, SIGNAL( clicked() ), SLOT( accept() ) );
+    connect( okBtn, SIGNAL( clicked() ), SLOT( accept_data() ) );
     layout->addWidget( okBtn );
 
 //    QPushButton* applyBtn = new QPushButton( "Apply" );
@@ -34,5 +34,14 @@ void DemoDialog::setTablesName(const QStringList tables)
 }
 
 QString DemoDialog::getInput() const {
-    return m_edit->text();
+    return m_tables->currentText();
 }
+
+void DemoDialog::accept_data()
+{
+    qDebug()<<"accept: "<< getInput();
+    emit chooseTable(getInput());
+    this->close();
+}
+
+
