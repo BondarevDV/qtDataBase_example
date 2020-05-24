@@ -5,10 +5,13 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
+
     ui->setupUi(this);
     /* Первым делом необходимо создать объект, который будет использоваться для работы с данными нашей БД
      * и инициализировать подключение к базе данных
      * */
+
+
     db = new CDataBase();
     db->connectToDataBase();
 
@@ -73,3 +76,18 @@ void MainWindow::createUI()
     model->select(); // Делаем выборку данных из таблицы
 }
 
+
+void MainWindow::on_ActionOpenDB_triggered()
+{
+    QStringList files = QFileDialog::getOpenFileNames(this,
+                                QString::fromUtf8("Выберите один, или более файлов"),
+                                QDir::currentPath(),
+                                "Images (*.png *.xpm *.jpg);;All files (*.*)");
+}
+
+void MainWindow::on_ActionReload_triggered()
+{
+    DemoDialog* dlg = new DemoDialog(this);
+    dlg->setTablesName(db->tables());
+    dlg->show();
+}

@@ -6,6 +6,7 @@
 #include <QtSql/QtSql>
 #include <database.h>
 #include "tablemodelsql.h"
+#include "demodialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -18,6 +19,11 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+
+private slots:
+    void on_ActionOpenDB_triggered();
+
+    void on_ActionReload_triggered();
 
 private:
     Ui::MainWindow *ui;

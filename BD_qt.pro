@@ -17,6 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     database.cpp \
+    demodialog.cpp \
     main.cpp \
     mainwindow.cpp \
     qcustomplot.cpp \
@@ -25,6 +26,7 @@ SOURCES += \
 
 HEADERS += \
     database.h \
+    demodialog.h \
     mainwindow.h \
     qcustomplot.h \
     tablemodelsql.h \
@@ -37,3 +39,11 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    resource.qrc
+
+DISTFILES += \
+    images/Barchart.png \
+    images/chartlines.png \
+    images/save.png

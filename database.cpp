@@ -31,6 +31,11 @@ bool CDataBase::inserIntoTable(const QVariantList &data)
     return true;
 }
 
+QStringList CDataBase::tables() const
+{
+    return m_tables;
+}
+
 bool CDataBase::openDataBase()
 {
     /* База данных открывается по заданному пути
@@ -44,6 +49,7 @@ bool CDataBase::openDataBase()
         QSqlQuery sql_q = QSqlQuery(db);
         for (const QString &tableName : db.tables()){
             qDebug()<< tableName;
+            m_tables.append(tableName);
         }
         return true;
     } else {

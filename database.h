@@ -35,10 +35,12 @@ public:
     void connectToDataBase();
     bool inserIntoTable(const QVariantList &data);
 
+    QStringList tables() const;
+
 private:
     // Сам объект базы данных, с которым будет производиться работа
     QSqlDatabase    db;
-
+    QStringList m_tables;
 private:
     /* Внутренние методы для работы с базой данных
      * */
