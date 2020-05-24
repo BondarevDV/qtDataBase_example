@@ -7,6 +7,8 @@
 #include <database.h>
 #include "tablemodelsql.h"
 #include "demodialog.h"
+#include "qcustomplot.h"
+#include <QDateTime>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -21,10 +23,13 @@ public:
     ~MainWindow();
 
 private slots:
+    void slotRangeChanged(const QCPRange &newRange);
     void on_ActionOpenDB_triggered();
 
     void on_ActionReload_triggered();
     void setupModel(const QString tableName);
+
+    void on_ActionLineChart_triggered();
 
 private:
     Ui::MainWindow *ui;
@@ -37,13 +42,14 @@ private:
      * */
     CDataBase        *db;
     DataTableModel  *model;
-
+    QCPGraph *graphic;          // Объявляем график
+    QCPBars *fossil;
 private:
     /* Также присутствуют два метода, которые формируют модель
      * и внешний вид TableView
      * */
 
     void createUI();
-
+    void initChart();
 };
 #endif // MAINWINDOW_H

@@ -61,11 +61,11 @@ bool CDataBase::restoreDataBase()
 {
     if(this->openDataBase()){
         qDebug() << "Восстановление базы данных";
-//            if(!this->createTable()){
-//                return false;
-//            } else {
-//                return true;
-//            }
+            if(!this->createTable()){
+                return false;
+            } else {
+                return true;
+            }
     } else {
             qDebug() << "Не удалось восстановить базу данных";
             return false;

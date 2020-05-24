@@ -5,18 +5,29 @@ DataTableModel::DataTableModel(QObject *parent) : QSqlTableModel(parent)
 
 }
 
-QVariant DataTableModel::data(const QModelIndex &idx, int role) const
+QVariant DataTableModel::data(const QModelIndex &index, int role) const
 {
-    QVariant v = QSqlTableModel::data(this->index(idx.row(), 0));
-    if(role == Qt::DisplayRole){
-        QString fmt = "dd-MM-yyyy hh:mm:ss";
-        uint time_stamp = QSqlTableModel::data(this->index(idx.row(), 0)).toUInt();
-        QString date = QDateTime::fromTime_t(time_stamp).toString(fmt);
-        QVariant v = QSqlTableModel::data(idx);
-        if(idx.column() == 0){
-            v.setValue(date);
-        }
-        return v;
+    auto getDate = [](uint timestamp)
+    {
+        return QDateTime::fromTime_t(timestamp).toString("dd-MM-yyyy hh:mm:ss");
+    };
+    switch (role) {
+        case Qt::DisplayRole:
+          if (index.column() == 0) {
+              return getDate(QSqlTableModel::data(this->index(index.row(), 0)).toUInt());
+          }
+          if (index.column() > 0) return QSqlTableModel::data(index);
+          break;
+        case Qt::EditRole:
+            //qDebug()<< "EditRole";
+            if (index.column() == 0) {
+                return getDate(QSqlTableModel::data(this->index(index.row(), 0)).toUInt());
+            }
+            if (index.column() > 0) return QSqlTableModel::data(index);
+          break;
+
+    default:
+        return  QVariant();
     }
     return QVariant();
 }
