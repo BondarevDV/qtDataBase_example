@@ -31,6 +31,8 @@ private slots:
 
     void on_ActionLineChart_triggered();
 
+    void on_ActionBuildBarChart_triggered();
+
 private:
     Ui::MainWindow *ui;
     /*
@@ -43,6 +45,7 @@ private:
     CDataBase        *db;
     DataTableModel  *model;
     QCPGraph *graphic;          // Объявляем график
+    QCPBarsGroup *group;
     QCPBars *fossil;
 private:
     /* Также присутствуют два метода, которые формируют модель

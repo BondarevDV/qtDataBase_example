@@ -156,3 +156,70 @@ void MainWindow::on_ActionLineChart_triggered()
 {
     initChart();
 }
+
+void MainWindow::on_ActionBuildBarChart_triggered()
+{
+    QSqlQueryModel* modelMain = new QSqlQueryModel(model);
+    //modelMain->setQuery("SELECT Number FROM data12 GROUP BY Number");
+
+    modelMain->setQuery(QString("SELECT * FROM data12 WHERE Number == %1").arg(0));
+
+    qDebug()<<"Number of relatives: "<< modelMain->data(modelMain->index(0, 0)).toString();
+    qDebug()<<"Numbers: "<< modelMain->record(0).value("Number").toInt();
+    qDebug()<<"Numbers: "<< modelMain->lastError();
+    ui->tableView->setModel(modelMain);
+//    while (modelMain->canFetchMore()) {
+//        modelMain->fetchMore();
+//    }
+//    for (int i = 0; i < modelMain->rowCount(); i++) {
+//        qDebug()<<"Number: "<< modelMain->record(i).value("Number").toInt();
+//    }
+//    group = new QCPBarsGroup(ui->customPlot);
+//    QVector<QCPBars*> v_bars(modelMain->rowCount());
+//    QCPBars *bars;// = new QCPBars(ui->customPlot->xAxis, ui->customPlot->yAxis);
+//    for (int i = 0; i < modelMain->rowCount(); i++) {
+//        bars = new QCPBars(ui->customPlot->xAxis, ui->customPlot->yAxis);
+//        v_bars.push_back(bars);
+//    }
+//    qDebug()<<"Size v_bars: "<<v_bars.count();
+    //ui->tableView->setModel(modelMain);
+
+    //QSqlQueryModel model;
+         //model.setQuery("SELECT * FROM employee");
+//    model->setQuery();
+//    ui->customPlot->setInteraction(QCP::iRangeZoom,true);   // Включаем взаимодействие удаления/приближения
+//    ui->customPlot->setInteraction(QCP::iRangeDrag, true);  // Включаем взаимодействие перетаскивания графика
+//    ui->customPlot->axisRect()->setRangeDrag(Qt::Horizontal);   // Включаем перетаскивание только по горизонтальной оси
+//    ui->customPlot->axisRect()->setRangeZoom(Qt::Horizontal);   // Включаем удаление/приближение только по горизонтальной оси
+
+//    QVector<double> datax = QVector<double>() << 1 << 2 << 3 << 4;
+//    QVector<double> datay1 = QVector<double>() << 0.6 << 0.5 << 0.3 << 0.15;
+//    QVector<double> datay2 = QVector<double>() << 0.3 << 0.28 << 0.2 << 0.1;
+//    QVector<double> datay3 = QVector<double>() << 0.33 << 0.31 << 0.27 << 0.13;
+
+//    group = new QCPBarsGroup(ui->customPlot);
+//    QCPBars *bars = new QCPBars(ui->customPlot->xAxis, ui->customPlot->yAxis);
+//    bars->setData(datax, datay1);
+//    bars->setBrush(QColor(0, 0, 255, 50));
+//    bars->setPen(QColor(0, 0, 255));
+//    bars->setWidth(0.15);
+//    bars->setBarsGroup(group);
+//    bars = new QCPBars(ui->customPlot->xAxis, ui->customPlot->yAxis);
+//    bars->setData(datax, datay2);
+//    bars->setBrush(QColor(180, 00, 120, 50));
+//    bars->setPen(QColor(180, 00, 120));
+//    bars->setWidth(0.15);
+//    bars->setBarsGroup(group);
+//    bars = new QCPBars(ui->customPlot->xAxis, ui->customPlot->yAxis);
+//    bars->setData(datax, datay3);
+//    bars->setBrush(QColor(255, 154, 0, 50));
+//    bars->setPen(QColor(255, 154, 0));
+//    bars->setWidth(0.15);
+//    bars->setBarsGroup(group);
+//    ui->customPlot->xAxis->setRange(0.1, 4.9);
+//    ui->customPlot->yAxis->setRange(0, 0.7);
+//    ui->customPlot->replot();
+
+//    // Сброс всех установок графика:
+//    ui->customPlot->removePlottable(fossil);
+}
