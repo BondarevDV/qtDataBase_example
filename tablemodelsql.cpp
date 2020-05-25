@@ -19,7 +19,6 @@ QVariant DataTableModel::data(const QModelIndex &index, int role) const
           if (index.column() > 0) return QSqlTableModel::data(index);
           break;
         case Qt::EditRole:
-            //qDebug()<< "EditRole";
             if (index.column() == 0) {
                 return getDate(QSqlTableModel::data(this->index(index.row(), 0)).toUInt());
             }

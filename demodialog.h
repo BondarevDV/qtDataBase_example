@@ -17,6 +17,7 @@ public:
 
     void setTablesName(QStringList tables);
     QString getInput() const;
+    void clear();
 
 signals:
     void applied();

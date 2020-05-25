@@ -37,6 +37,11 @@ QString DemoDialog::getInput() const {
     return m_tables->currentText();
 }
 
+void DemoDialog::clear()
+{
+    m_tables->clear();
+}
+
 void DemoDialog::accept_data()
 {
     qDebug()<<"accept: "<< getInput();

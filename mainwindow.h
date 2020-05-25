@@ -43,7 +43,8 @@ private:
      * и моделью представления таблицы базы данных
      * */
     CDataBase        *db;
-    DataTableModel  *model;
+    //DataTableModel *model;
+    QScopedPointer<DataTableModel> model;
     QCPGraph *graphic;          // Объявляем график
     QCPBarsGroup *group;
     QCPBars *fossil;

@@ -29,6 +29,7 @@ HEADERS += \
     charts.h \
     database.h \
     demodialog.h \
+    exm.h \
     mainwindow.h \
     qcustomplot.h \
     tablemodelsql.h \

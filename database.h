@@ -13,15 +13,8 @@
 #include <QMessageBox>
 #include <QDir>
 
-/* Директивы имен таблицы, полей таблицы и базы данных */
 #define DATABASE_HOSTNAME   "ExampleDataBase"
-#define DATABASE_NAME       "sample.db"
 
-#define TABLE                   "data12"
-#define TABLE_DATE              "Date"
-#define TABLE_TIME              "Time"
-#define TABLE_MESSAGE           "Message"
-#define TABLE_RANDOM            "Random"
 
 class CDataBase : public QObject
 {
@@ -32,7 +25,7 @@ public:
     /* Методы для непосредственной работы с классом
      * Подключение к базе данных и вставка записей в таблицу
      * */
-    void connectToDataBase();
+    void connectToDataBase(const QString file_name);
     bool inserIntoTable(const QVariantList &data);
 
     QStringList tables() const;
@@ -44,8 +37,8 @@ private:
 private:
     /* Внутренние методы для работы с базой данных
      * */
-    bool openDataBase();
-    bool restoreDataBase();
+    bool openDataBase(const QString file_name);
+    bool restoreDataBase(const QString file_name);
     void closeDataBase();
     bool createTable();
 

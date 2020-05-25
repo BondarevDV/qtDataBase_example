@@ -11,17 +11,16 @@ CDataBase::~CDataBase()
 }
 
 
-void CDataBase::connectToDataBase()
+void CDataBase::connectToDataBase(const QString file_name)
 {
     /* Перед подключением к базе данных производим проверку на её существование.
      * В зависимости от результата производим открытие базы данных или её восстановление
      * */
-    QString path_db = QString("%1/%2").arg(QDir::currentPath()).arg(DATABASE_NAME);
-    if(!QFile(path_db).exists()){
+    if(!QFile(file_name).exists()){
         //this->restoreDataBase();
         qDebug()<<"БД не существует";
     } else {
-        this->openDataBase();
+        this->openDataBase(file_name);
     }
 }
 
@@ -36,15 +35,14 @@ QStringList CDataBase::tables() const
     return m_tables;
 }
 
-bool CDataBase::openDataBase()
+bool CDataBase::openDataBase(const QString file_name)
 {
     /* База данных открывается по заданному пути
      * и имени базы данных, если она существует
      * */
-    QString path_db = QString("%1/%2").arg("./").arg(DATABASE_NAME);
     db = QSqlDatabase::addDatabase("QSQLITE");
     db.setHostName(DATABASE_HOSTNAME);
-    db.setDatabaseName(path_db);
+    db.setDatabaseName(file_name);
     if(db.open()){
         QSqlQuery sql_q = QSqlQuery(db);
         for (const QString &tableName : db.tables()){
@@ -57,9 +55,9 @@ bool CDataBase::openDataBase()
     }
 }
 
-bool CDataBase::restoreDataBase()
+bool CDataBase::restoreDataBase(const QString file_name)
 {
-    if(this->openDataBase()){
+    if(this->openDataBase(file_name)){
         qDebug() << "Восстановление базы данных";
             if(!this->createTable()){
                 return false;
@@ -70,6 +68,11 @@ bool CDataBase::restoreDataBase()
             qDebug() << "Не удалось восстановить базу данных";
             return false;
     }
+}
+
+void CDataBase::closeDataBase()
+{
+    db.close();
 }
 
 bool CDataBase::createTable()
